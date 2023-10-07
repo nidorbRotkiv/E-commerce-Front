@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Category } from "ecommerce-shared/models/Category";
 import { Product } from "ecommerce-shared/models/Product";
 import UtilityFunctions from "@/lib/utilityFunctions";
@@ -51,6 +52,7 @@ export default function CategoryPage({ category, childCategories, products }) {
 }
 
 export async function getServerSideProps(context) {
+  await mongooseConnect();
   const id = context.query.id.split("=")[1];
   let category;
   let products;

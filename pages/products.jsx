@@ -1,3 +1,4 @@
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Product } from "ecommerce-shared/models/Product";
 import Center from "@/components/Center";
 import ProductsGrid from "@/components/ProductsGrid";
@@ -15,6 +16,7 @@ export default function ProductsPage({ products }) {
 }
 
 export async function getServerSideProps() {
+  await mongooseConnect();
   let products;
   try {
     products = await Product.find({});

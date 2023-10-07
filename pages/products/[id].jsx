@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Product } from "ecommerce-shared/models/Product";
 import {
   currency,
@@ -200,6 +201,7 @@ export default function ProductPage({ initialProduct, selectedVariantValue }) {
 }
 
 export async function getServerSideProps(context) {
+  await mongooseConnect();
   const url = context.query.id;
   const selectedVariantValue = url.substring(
     url.indexOf("=") + 1,

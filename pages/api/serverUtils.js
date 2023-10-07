@@ -1,3 +1,4 @@
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Product } from "ecommerce-shared/models/Product";
 import UtilityFunctions from "@/lib/utilityFunctions";
 
@@ -9,6 +10,7 @@ function getQuantity(cartProducts, _id, selectedVariant) {
 }
 
 export async function constructLineItems(cartProducts) {
+  await mongooseConnect();
   const line_items = [];
   const errors = [];
   const uniqeProducts = UtilityFunctions.getUniqueProducts(cartProducts);
@@ -59,6 +61,7 @@ export async function constructLineItems(cartProducts) {
 }
 
 export async function constructLineItemsFromString(productsInfoAsString) {
+  await mongooseConnect();
   const line_items = [];
   const productInfoAsArray = productsInfoAsString.split(",");
   const numOfFields = 3;

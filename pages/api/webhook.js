@@ -1,3 +1,4 @@
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Order } from "ecommerce-shared/models/Order";
 import { Product } from "ecommerce-shared/models/Product";
 import { buffer } from "micro";
@@ -8,6 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.WEBHOOK_SIGNING_SECRET;
 
 export default async function handler(req, res) {
+  await mongooseConnect();
   try {
     const sig = req.headers["stripe-signature"];
     const event = stripe.webhooks.constructEvent(

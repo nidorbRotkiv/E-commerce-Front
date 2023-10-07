@@ -1,3 +1,4 @@
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Product } from "ecommerce-shared/models/Product";
 import Featured from "../components/Featured";
 import NewProducts from "@/components/NewProducts";
@@ -18,6 +19,7 @@ export default function HomePage({ featuredProduct, newProducts }) {
 }
 
 export async function getServerSideProps() {
+  await mongooseConnect();
   let featuredProducts;
   let newProducts;
   try {

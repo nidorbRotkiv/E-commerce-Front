@@ -1,3 +1,4 @@
+import { mongooseConnect } from "ecommerce-shared/mongoDB/mongoose";
 import { Category } from "ecommerce-shared/models/Category";
 import Center from "@/components/Center";
 import CategoriesGrid from "@/components/CategoriesGrid";
@@ -15,6 +16,7 @@ export default function Categories({ categories }) {
 }
 
 export async function getServerSideProps() {
+  await mongooseConnect();
   let categories;
   try {
     categories = await Category.find({ parentCategory: null });
