@@ -4,7 +4,7 @@
   <h1>E-commerce-Front (The Bestiehood)</h1>
 
   <h2>
-   :star: <a href="https://bestiehood.vercel.app/">Check out the website</a> :star:
+   :star: <a href="https://bestiehood.vercel.app/">Check out the website!</a> :star:
   </h2> 
   
 </div>
