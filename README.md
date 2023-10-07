@@ -1,7 +1,7 @@
 <div align="center">
 
   <img src="public/assets/logo.png" alt="front" width="300" height="auto" />
-  <h1>eCommerce-Front (The Bestiehood)</h1>
+  <h1>E-commerce-Front (The Bestiehood)</h1>
 
   <h2>
    :star: <a href="https://bestiehood.vercel.app/">Check out the website</a> :star:
@@ -40,8 +40,8 @@ Fullstack e-commerce built for a Peruvian business specialicing in importing mak
 
 ### :eyes: Features
 
-- Admin creates products, categories, brands etc., via eCommerce-Admin.
-- eCommerce-Front fetches the data using mongoose models from eCommerce-Shared.
+- Admin creates products, categories, brands etc., via E-commerce-Admin.
+- E-commerce-Front fetches the data using mongoose models from E-commerce-Shared.
 - Accepts Visa, Mastercard, Amex, Discover, and Union Pay.
 - Filter and search products by name, color, size, and more.
 - Delivery fee based on address.
