@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import { white, bodyBackgroundColor } from "@/lib/colors";
-import { mediumBorderRadius } from "@/lib/constants";
+import { mediumBorderRadius, mediumScreen } from "@/lib/constants";
 import defaultImage from "@/public/assets/image5.jpeg";
 import UtilityFunctions from "@/lib/utilityFunctions";
 
@@ -35,7 +35,7 @@ const Title = styled.h1`
   color: inherit;
   text-decoration: none;
   margin: 0;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${mediumScreen}px) {
     font-size: 1.3rem;
   }
 `;
