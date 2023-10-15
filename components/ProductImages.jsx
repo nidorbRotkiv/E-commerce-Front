@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { mediumBorderRadius } from "@/lib/constants";
+import {
+  mediumBorderRadius,
+  mediumScreen,
+  largeScreen,
+  smallScreen,
+} from "@/lib/constants";
+import Image from "next/image";
 
-const SmallImage = styled.img`
-  max-width: 100%;
+const SmallImage = styled(Image)`
   max-height: 100%;
   border-radius: ${mediumBorderRadius}px;
   &:hover {
@@ -11,12 +16,24 @@ const SmallImage = styled.img`
   }
 `;
 
-const FocusedImage = styled.img`
-  max-width: 100%;
-  max-height: 300px;
-  border-radius: ${mediumBorderRadius}px;
+const FocusedImage = styled.div`
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  height: 350px;
   &:hover {
     opacity: 0.7;
+  }
+  img {
+    border-radius: ${mediumBorderRadius}px;
+  }
+  @media screen and (min-width: ${smallScreen}px) and (max-width: ${(largeScreen +
+      mediumScreen) /
+    2}px) {
+    width: 80%;
+  }
+  @media screen and (max-width: ${smallScreen}px) {
+    height: 280px;
   }
 `;
 
@@ -28,13 +45,13 @@ const ImageButtons = styled.div`
 `;
 
 const FocusedImageWrapper = styled.div`
-  text-align: center;
   cursor: pointer;
 `;
 
 const ImageButton = styled.div`
   ${({ $active }) => !$active && `border-color:transparent; opacity: 0.6;`}
   height: 60px;
+  width: 60px;
   cursor: pointer;
 `;
 
@@ -76,16 +93,33 @@ export default function ProductImages({ images }) {
         </ExpandedOverlay>
       )}
       <FocusedImageWrapper onClick={handleImageClick}>
-        <FocusedImage src={focusedImage} alt="focused product image" />
+        <FocusedImage>
+          <Image
+            src={focusedImage}
+            alt="product image"
+            fill
+            sizes="100%"
+            priority
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </FocusedImage>
       </FocusedImageWrapper>
       <ImageButtons>
-        {images?.map((image) => (
+      {images?.map((image) => (
           <ImageButton
             $active={image === focusedImage}
             onClick={() => setFocusedImage(image)}
             key={image}
           >
-            <SmallImage src={image} alt="product image" />
+            <SmallImage
+              src={image}
+              alt="product image"
+              layout="responsive"
+              width={100}
+              height={100}
+            />
           </ImageButton>
         ))}
       </ImageButtons>
