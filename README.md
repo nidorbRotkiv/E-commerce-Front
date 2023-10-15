@@ -40,8 +40,8 @@ Fullstack e-commerce built for a Peruvian business specialicing in importing mak
 
 ### :eyes: Features
 
-- Admin creates products, categories, brands etc., via E-commerce-Admin.
-- E-commerce-Front fetches the data using mongoose models from E-commerce-Shared.
+- Admin creates products, categories, brands etc., via <a href="https://github.com/nidorbRotkiv/E-commerce-Admin">E-commerce-Admin</a>.
+- E-commerce-Front fetches the data using mongoose models from <a href="https://github.com/nidorbRotkiv/eCommerce-Shared">E-commerce-Shared</a>.      
 - Accepts Visa, Mastercard, Amex, Discover, and Union Pay.
 - Filter and search products by name, color, size, and more.
 - Delivery fee based on address.
