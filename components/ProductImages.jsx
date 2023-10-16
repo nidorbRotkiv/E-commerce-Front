@@ -27,13 +27,11 @@ const FocusedImage = styled.div`
   img {
     border-radius: ${mediumBorderRadius}px;
   }
-  @media screen and (min-width: ${smallScreen}px) and (max-width: ${(largeScreen +
-      mediumScreen) /
-    2}px) {
-    width: 80%;
+  @media screen and (min-width: ${mediumScreen}px) {
+    width: 50%;
   }
-  @media screen and (max-width: ${smallScreen}px) {
-    height: 280px;
+  @media screen and (min-width: ${(mediumScreen + largeScreen) / 2}px) {
+    width: 70%;
   }
 `;
 
@@ -107,7 +105,7 @@ export default function ProductImages({ images }) {
         </FocusedImage>
       </FocusedImageWrapper>
       <ImageButtons>
-      {images?.map((image) => (
+        {images?.map((image) => (
           <ImageButton
             $active={image === focusedImage}
             onClick={() => setFocusedImage(image)}
