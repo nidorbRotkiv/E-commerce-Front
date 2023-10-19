@@ -7,6 +7,7 @@ import {
   smallScreen,
 } from "@/lib/constants";
 import Image from "next/image";
+import Loader from "@/components/Loader";
 
 const ImageLoading = styled.div`
   display: ${({ $loaded }) => ($loaded ? "block" : "none")};
@@ -93,47 +94,50 @@ export default function ProductImages({ images }) {
   };
 
   return (
-    <ImageLoading $loaded={loaded}>
-      {expanded && (
-        <ExpandedOverlay onClick={handleImageClick}>
-          <ExpandedImage src={focusedImage} alt="expanded product image" />
-        </ExpandedOverlay>
-      )}
-      <FocusedImageWrapper onClick={handleImageClick}>
-        <FocusedImage>
-          <Image
-            src={focusedImage}
-            alt="product image"
-            fill
-            sizes="100%"
-            priority
-            style={{
-              objectFit: "cover",
-            }}
-            onLoad={() => {
-              setLoaded(true);
-            }}
-          />
-        </FocusedImage>
-      </FocusedImageWrapper>
-      <ImageButtons>
-        {images?.map((image) => (
-          <ImageButton
-            $active={image === focusedImage}
-            onClick={() => setFocusedImage(image)}
-            key={image}
-          >
-            <SmallImage
-              src={image}
+    <>
+      {!loaded && <Loader />}
+      <ImageLoading $loaded={loaded}>
+        {expanded && (
+          <ExpandedOverlay onClick={handleImageClick}>
+            <ExpandedImage src={focusedImage} alt="expanded product image" />
+          </ExpandedOverlay>
+        )}
+        <FocusedImageWrapper onClick={handleImageClick}>
+          <FocusedImage>
+            <Image
+              src={focusedImage}
               alt="product image"
-              layout="responsive"
-              width={100}
-              height={100}
+              fill
+              sizes="100%"
               priority
+              style={{
+                objectFit: "cover",
+              }}
+              onLoad={() => {
+                setLoaded(true);
+              }}
             />
-          </ImageButton>
-        ))}
-      </ImageButtons>
-    </ImageLoading>
+          </FocusedImage>
+        </FocusedImageWrapper>
+        <ImageButtons>
+          {images?.map((image) => (
+            <ImageButton
+              $active={image === focusedImage}
+              onClick={() => setFocusedImage(image)}
+              key={image}
+            >
+              <SmallImage
+                src={image}
+                alt="product image"
+                layout="responsive"
+                width={100}
+                height={100}
+                priority
+              />
+            </ImageButton>
+          ))}
+        </ImageButtons>
+      </ImageLoading>
+    </>
   );
 }
