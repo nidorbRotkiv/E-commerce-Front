@@ -8,6 +8,10 @@ import {
 } from "@/lib/constants";
 import Image from "next/image";
 
+const ImageLoading = styled.div`
+  display: ${({ $loaded }) => ($loaded ? "block" : "none")};
+`;
+
 const SmallImage = styled(Image)`
   max-height: 100%;
   border-radius: ${mediumBorderRadius}px;
@@ -74,6 +78,11 @@ const ExpandedImage = styled.img`
 export default function ProductImages({ images }) {
   const [focusedImage, setFocusedImage] = useState(images[0]);
   const [expanded, setExpanded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [focusedImage]);
 
   useEffect(() => {
     setFocusedImage(images[0]);
@@ -84,7 +93,7 @@ export default function ProductImages({ images }) {
   };
 
   return (
-    <>
+    <ImageLoading $loaded={loaded}>
       {expanded && (
         <ExpandedOverlay onClick={handleImageClick}>
           <ExpandedImage src={focusedImage} alt="expanded product image" />
@@ -100,6 +109,9 @@ export default function ProductImages({ images }) {
             priority
             style={{
               objectFit: "cover",
+            }}
+            onLoad={() => {
+              setLoaded(true);
             }}
           />
         </FocusedImage>
@@ -117,10 +129,11 @@ export default function ProductImages({ images }) {
               layout="responsive"
               width={100}
               height={100}
+              priority
             />
           </ImageButton>
         ))}
       </ImageButtons>
-    </>
+    </ImageLoading>
   );
 }
