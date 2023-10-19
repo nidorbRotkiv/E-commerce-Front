@@ -93,11 +93,10 @@ export default function ProductPage({ initialProduct, selectedVariantValue }) {
   const { isAvailable } = useContext(CartContext);
 
   useEffect(() => {
-    if (product) {
-      setProduct({ ...product, selectedVariant: selectedVariant });
-      const newUrl = UtilityFunctions.getProductUrl(product);
-      history.pushState(null, "", newUrl);
-    }
+    const newProduct = { ...product, selectedVariant: selectedVariant };
+    setProduct(newProduct);
+    const newUrl = UtilityFunctions.getProductUrl(newProduct);
+    history.pushState(null, "", newUrl);
   }, [selectedVariant]);
 
   const { title, description, variantKey, variantValues, properties } = product;
@@ -190,7 +189,10 @@ export default function ProductPage({ initialProduct, selectedVariantValue }) {
                   </Button>
                 </PriceRow>
               ) : (
-                <NotAvailable>{UtilityFunctions.displayOutOfStock(selectedVariant.stock)} &#128532;</NotAvailable>
+                <NotAvailable>
+                  {UtilityFunctions.displayOutOfStock(selectedVariant.stock)}{" "}
+                  &#128532;
+                </NotAvailable>
               )}
             </ProductInfo>
           </ColWrapper>
