@@ -80,10 +80,19 @@ export default function ProductImages({ images }) {
   const [focusedImage, setFocusedImage] = useState(images[0]);
   const [expanded, setExpanded] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const timeUntilLoad = 3000;
 
   useEffect(() => {
     setLoaded(false);
   }, [focusedImage]);
+
+  useEffect(() => {
+    // solves a bug in safari where the first image doesn't load properly.
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, timeUntilLoad);
+    return () => clearTimeout(timeout);
+  }, [images]);
 
   useEffect(() => {
     setFocusedImage(images[0]);
