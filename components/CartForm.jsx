@@ -12,7 +12,7 @@ import WhiteBox from "./WhiteBox";
 
 const customerInfoBox = css`
   width: 100%;
-  padding: 15px;
+  padding: 10px 0 8px 10px;
   margin-bottom: 10px;
   border: 1px solid ${grey3};
   border-radius: ${smallBorderRadius}px;
@@ -21,10 +21,12 @@ const customerInfoBox = css`
 `;
 
 const Input = styled.input`
+  all: unset;
   ${customerInfoBox}
 `;
 
 const Select = styled.select`
+  all: unset;
   ${customerInfoBox}
 `;
 
@@ -59,7 +61,7 @@ export default function CartForm() {
       streetAddress: "",
       city: "",
       postalCode: "",
-      country: "Perú", // We only ship to Peru
+      country: "", // We only ship to Peru
       phoneNumber: "",
       idNumber: "",
     },
@@ -262,11 +264,32 @@ export default function CartForm() {
   }
 
   function renderCityOptions() {
-    return cities.map((city) => (
-      <option key={city} value={city}>
-        {city}
-      </option>
-    ));
+    return (
+      <>
+        <option value="" disabled>
+          Ciudad
+        </option>
+        {cities.map((city) => (
+          <option key={city} value={city}>
+            {city}
+          </option>
+        ))}
+      </>
+    );
+  }
+
+  function renderCountryOptions() {
+    return (
+      <>
+        <option value="" disabled>
+          País
+        </option>
+        {/* We only ship to peru at the moment. */}
+        <option key="Perú" value="Perú">
+          Perú
+        </option>
+      </>
+    );
   }
 
   return (
@@ -284,9 +307,6 @@ export default function CartForm() {
             value={formState.customerInfo.city}
             onChange={handleInputChange}
           >
-            <option value="" disabled>
-              Ciudad
-            </option>
             {renderCityOptions()}
           </Select>
           {formState.errors.city && (
@@ -295,7 +315,20 @@ export default function CartForm() {
         </div>
         <div>{renderInputField("postalCode", "number", "Código Postal")}</div>
       </SameLine>
-      {renderInputField("country", "text", "País")}
+      <div>
+        <label htmlFor="city"></label>
+        <Select
+          id="country"
+          name="country"
+          value={formState.customerInfo.country}
+          onChange={handleInputChange}
+        >
+          {renderCountryOptions()}
+        </Select>
+        {formState.errors.country && (
+          <ErrorMessage>{formState.errors.country}</ErrorMessage>
+        )}
+      </div>
       <SameLine>
         <div>
           {renderInputField("phoneNumber", "text", "Número de teléfono")}
