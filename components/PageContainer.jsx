@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -13,6 +14,17 @@ const Children = styled.div`
 `;
 
 export default function PageContainer({ children }) {
+  // Used to solve bug where the page would render without styles
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return;
+  }
+
   return (
     <Container>
       <Header />
