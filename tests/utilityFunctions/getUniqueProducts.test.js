@@ -1,18 +1,9 @@
 import UtilityFunctions from "../../lib/utilityFunctions";
+import fakeProducts from "../fakeProducts";
 
 test("testGetUniqueProducts", () => {
-  const product = {
-    title: "name",
-    description: "description",
-    category: null,
-    properties: null,
-    featured: false,
-    variantKey: "",
-    variantValues: [],
-    selectedVariant: { value: "test" },
-  };
-  const products = [product, product];
+  const products = [fakeProducts[0], fakeProducts[0]];
   const received = UtilityFunctions.getUniqueProducts(products);
-  const e = [products[0]];
+  const e = [fakeProducts[0]];
   expect(received).toStrictEqual(e);
 });
