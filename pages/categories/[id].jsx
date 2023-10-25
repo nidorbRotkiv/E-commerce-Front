@@ -36,11 +36,11 @@ export default function CategoryPage({ category, childCategories, products }) {
         </BackButtonWrapper>
         {childCategories.length > 0 && (
           <>
-            <h1>Más categorías</h1>
+            <h1>{category.name}</h1>
             <CategoriesGrid categories={childCategories} />
           </>
         )}
-        {products.length > 0 && (
+        {(products.length > 0 || childCategories.length <= 0) && (
           <>
             <h1>{category.name}</h1>
             <ProductsGrid products={products} sorting={true} />
