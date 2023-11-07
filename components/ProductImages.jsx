@@ -80,7 +80,7 @@ export default function ProductImages({ images }) {
   const [focusedImage, setFocusedImage] = useState(images[0]);
   const [expanded, setExpanded] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const timeUntilLoad = 3000;
+  const timeUntilLoad = 4000;
 
   useEffect(() => {
     setLoaded(false);
