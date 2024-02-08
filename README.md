@@ -22,7 +22,7 @@
     - [:key: Environment Variables](#key-environment-variables)
   - [:toolbox: Getting Started](#toolbox-getting-started)
     - [:bangbang: Prerequisites](#bangbang-prerequisites)
-    - [Setup](#setup)
+    - [⚙️ Setup](#gear-setup)
 
 <!-- About the Project -->
 
@@ -99,7 +99,7 @@ To run this project, you will need to add the following environment variables to
    <li><a href="https://www.mongodb.com/">Mongo DB</a></li>
  </ul>
 
-### Setup
+### :gear: Setup
 
 Clone the project
 
